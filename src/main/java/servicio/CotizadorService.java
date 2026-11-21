@@ -5,26 +5,41 @@ import dao.ConfiguracionDAO;
 import modelo.Configuracion;
 import modelo.Evento;
 
+import java.time.LocalDate;
+
 public class CotizadorService {
+
+    // Resultado de cotizar: cada concepto, el total y la seña
+    public record Desglose(double salon, double extras, double catering, double total, double senia) {
+    }
+
     private final ConfiguracionDAO configuracionDAO;
 
     public CotizadorService(ConfiguracionDAO dao) {
         this.configuracionDAO = dao;
     }
 
-    public void calcularTotal(Evento e) throws AccesoDatosException {
+    public Desglose calcularTotal(Evento e) throws AccesoDatosException {
         Configuracion c = configuracionDAO.leer(); // una sola lectura
-        double total = elegirTarifaBase(e, c)
-                + calcularExtraPersonas(e, c)
-                + calcularTotalExtras(e, c)
-                + calcularTotalCatering(e);
+        double salon = elegirTarifaBase(e, c) + calcularExtraPersonas(e, c);
+        double extras = calcularTotalExtras(e, c);
+        double catering = calcularTotalCatering(e);
+        double total = salon + extras + catering;
+        double senia = total * 0.5;
+
         e.setDuracion(calcularDuracion(e));
         e.setMontoTotal(total);
-        e.setMontoSenia(total * 0.5);
+        e.setMontoSenia(senia);
+        return new Desglose(salon, extras, catering, total, senia);
+    }
+
+    public int calcularDuracionBase(LocalDate fecha, boolean esFeriado) {
+        int d = fecha.getDayOfWeek().getValue(); // 1=lunes ... 7=domingo
+        return (d <= 4 && !esFeriado) ? 150 : 120;
     }
 
     private boolean esTarifaSemana(Evento e) {
-        int d = e.getFecha().getDayOfWeek().getValue(); // 1=lunes ... 7=domingo
+        int d = e.getFecha().getDayOfWeek().getValue();
         return d <= 4 && !e.isEsFeriado();
     }
 
@@ -51,7 +66,7 @@ public class CotizadorService {
     }
 
     private int calcularDuracion(Evento e) {
-        int base = esTarifaSemana(e) ? 150 : 120;
+        int base = calcularDuracionBase(e.getFecha(), e.isEsFeriado());
         return base + 30 * e.getMediaHoraExtra() + 60 * e.getHoraExtra();
     }
 }

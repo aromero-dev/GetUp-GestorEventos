@@ -10,18 +10,18 @@ public class Cliente {
     private List<Evento> eventos;
 
 
-    public Cliente(String telefono, String nombre) throws ValidacionException {
+    public Cliente(String nombre, String telefono) throws ValidacionException {
         setNombre(nombre);
         setTelefono(telefono);
         this.eventos = new ArrayList<>();
     }
 
-    public Cliente(int idCliente,String telefono, String nombre) {
+    public Cliente(int idCliente, String nombre, String telefono) {
         this.idCliente = idCliente;
-        this.telefono = telefono;
         this.nombre = nombre;
-
+        this.telefono = telefono;
     }
+
 
     public void setNombre(String nombre) throws ValidacionException {
         if (nombre==null || nombre.trim().isEmpty()) {

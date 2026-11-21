@@ -1,0 +1,200 @@
+.root {
+    /* Paleta: para cambiar los colores del sistema se editan solo estas líneas */
+    -color-nuevo: #4CAF50;
+    -color-ver: #2196F3;
+    -color-historial: #9C27B0;
+    -color-recaudacion: #FF9800;
+    -color-opciones: #607D8B;
+    -color-peligro: #E53935;
+    -color-fondo: white;
+    -color-bloque: #F5F5F5;
+    -color-pendiente: #FFE0B2;
+    -color-borde: #D0D5DD;
+    -color-texto: #263238;
+
+    -fx-background-color: -color-fondo;
+    -fx-font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    -fx-font-size: 14px;
+
+    /* el brillo de foco por defecto pasa a ser el azul de la paleta */
+    -fx-focus-color: -color-ver;
+    -fx-faint-focus-color: transparent;
+}
+
+.label {
+    -fx-text-fill: -color-texto;
+}
+
+/* ---------- Scroll ---------- */
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: -color-fondo;
+}
+
+/* ---------- Botones comunes (Volver, Ver, Editar, Buscar) ---------- */
+.button {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-border-color: -color-borde;
+    -fx-border-radius: 10;
+    -fx-padding: 7 16 7 16;
+    -fx-text-fill: -color-texto;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #EEF3F8;
+}
+
+/* ---------- Botones tipo tarjeta ---------- */
+.tarjeta {
+    -fx-background-radius: 20;
+    -fx-border-width: 0;
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.18), 8, 0, 0, 2);
+}
+
+.tarjeta:hover {
+    -fx-opacity: 0.85;
+}
+
+.tarjeta:pressed {
+    -fx-effect: none;
+    -fx-translate-y: 1;
+}
+
+.nuevo { -fx-background-color: -color-nuevo; }
+.ver { -fx-background-color: -color-ver; }
+.historial { -fx-background-color: -color-historial; }
+.recaudacion { -fx-background-color: -color-recaudacion; }
+.opciones { -fx-background-color: -color-opciones; }
+.cancelar { -fx-background-color: -color-peligro; }
+
+/* ---------- Campos de texto ---------- */
+.text-field {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-border-color: -color-borde;
+    -fx-border-radius: 10;
+    -fx-padding: 8 10 8 10;
+}
+
+.text-field:focused {
+    -fx-border-color: -color-ver;
+    -fx-border-width: 2;
+}
+
+/* ---------- Spinner (niños, adultos, extras, hora) ---------- */
+.spinner {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-border-color: -color-borde;
+    -fx-border-radius: 10;
+}
+
+.spinner:focused {
+    -fx-border-color: -color-ver;
+    -fx-border-width: 2;
+}
+
+.spinner .text-field {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.spinner .increment-arrow-button,
+.spinner .decrement-arrow-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+/* ---------- Selector de fecha y desplegable de catering ---------- */
+.combo-box-base {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-border-color: -color-borde;
+    -fx-border-radius: 10;
+}
+
+.combo-box-base:focused {
+    -fx-border-color: -color-ver;
+    -fx-border-width: 2;
+}
+
+.combo-box-base .text-field {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.combo-box-base > .arrow-button {
+    -fx-background-color: transparent;
+}
+
+/* ---------- Casilla de feriado ---------- */
+.check-box {
+    -fx-text-fill: -color-texto;
+    -fx-cursor: hand;
+}
+
+.check-box:selected .mark {
+    -fx-background-color: -color-nuevo;
+}
+
+.check-box .box {
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-border-color: -color-borde;
+}
+
+/* ---------- Bloques y filas de lista ---------- */
+.bloque {
+    -fx-background-color: -color-bloque;
+    -fx-background-radius: 15;
+    -fx-border-color: #E4E7EC;
+    -fx-border-radius: 15;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.06), 8, 0, 0, 2);
+}
+
+.fila-pendiente {
+    -fx-background-color: -color-pendiente;
+    -fx-background-radius: 15;
+}
+
+.fila-realizado {
+    -fx-background-color: -color-bloque;
+    -fx-background-radius: 15;
+    -fx-border-color: transparent transparent transparent -color-nuevo;
+    -fx-border-width: 0 0 0 8;
+    -fx-border-radius: 15;
+}
+
+.fila-cancelado {
+    -fx-background-color: -color-bloque;
+    -fx-background-radius: 15;
+    -fx-border-color: transparent transparent transparent -color-peligro;
+    -fx-border-width: 0 0 0 8;
+    -fx-border-radius: 15;
+}
+
+/* ---------- Cabecera y totales ---------- */
+.cabecera {
+    -fx-background-color: -color-fondo;
+}
+
+.titulo-cabecera {
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-opciones;
+}
+
+.total-grande {
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+}
